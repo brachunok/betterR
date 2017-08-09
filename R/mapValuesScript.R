@@ -1,6 +1,3 @@
-
-df <- read.csv("~/Documents/__College/Research Stuff/obs_prediction/r_files/OBS.2013_MarchData.csv")
-
 #' Make a USA map with all the counties colored in
 #'
 #' @param df The data frame of the counties in the US and the data to plot
@@ -15,14 +12,7 @@ df <- read.csv("~/Documents/__College/Research Stuff/obs_prediction/r_files/OBS.
 #' @export
 #'
 #' @examples
-mapValues <- function(df, county_index=1,plot_index=2,save=TRUE,filename="./usa_plot.png"){
-
-
-  map.county <- data.table::data.table(map_data('county'))
-  setkey(map.county,region,subregion)
-  obesity_map <- data.table(df.2013)
-  setkey(obesity_map,Region,County)
-  map.df <- map.county[obesity_map]
+mapValues <- function(df, county_index=1,plot_index=2,save=TRUE,filename="./usa_plot.png",titleString="default plot"){
 
   data(county.fips)
   county.fips$polyname <- as.character(county.fips$polyname)
@@ -47,12 +37,12 @@ mapValues <- function(df, county_index=1,plot_index=2,save=TRUE,filename="./usa_
           by.x = c("fips"),
           by.y=names(df)[county_index])
 
-  #map.county <- map_data('county')
-  #map.df <- merge(df.2013,map.county,by.x='County',by.y='region')
+  plot_data2 <- plot_data[order(plot_data$order),]
+  fillString <- names(df)[plot_index]
 
-  ggplot(plot_data,aes(x=long,y=lat,group=group,fill=names(df)[county_index])) +
+  ggplot(plot_data2,aes_string(x="long",y="lat",group="group",fill=fillString)) +
     geom_polygon()+ coord_map() +
-    ggtitle("Counties Used for Obesity Prediction")
+    ggtitle(titleString)
 
 
 }
