@@ -1,0 +1,15 @@
+Package: betterR
+Type: Package
+Title: B.A. Rachunok's (personally) helpful scripts
+Version: 0.1.0
+Authors@R: person("Benjamin","Rachunok",email="brachuno@purdue.edu",
+    role=c("aut","cre"))
+Description: If I have needed something more than once, or could potentially need
+    it for more than one project, it's in here for the most part.
+    Clean data is also in here 
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Imports: ggplot2,
+    mapproj,
+    data.table
